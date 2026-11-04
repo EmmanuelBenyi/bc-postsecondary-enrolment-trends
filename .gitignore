@@ -1,0 +1,10 @@
+# Downloaded Statistics Canada source table (about 67 MB).
+# analysis.py re-downloads it on first run if it is not present.
+statcan_37100018.zip
+
+# Python
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store

@@ -1,6 +1,6 @@
 # BC Post-Secondary Enrolment Trends — with an International Student Highlight
 
-**Question:** How have post-secondary admissions and enrolment in British Columbia
+**Question:** How has post-secondary enrolment in British Columbia
 trended, and what do international student enrolment trends in BC and Canada
 show within that picture?
 
@@ -12,6 +12,14 @@ dipped in 2024/25, the first decline since the pandemic year.
 
 **By:** Emmanuel Kweku Benyi — MBA (data analytics), University Canada West;
 Admissions Advisor, Discovery Community College, Surrey, BC.
+
+## Executive summary
+
+![BC international enrolment and share, 2000/01–2024/25](charts/executive_summary.svg)
+
+**Takeaway:** International students drove two-thirds of BC's enrolment
+growth since 2000 — then fell 6.3% in 2024/25, the first decline since the
+pandemic year.
 
 ## What the data shows
 
@@ -71,17 +79,41 @@ that would need a different dataset.
 
 No personal data is used anywhere in this project.
 
+## Data dictionary — `data/bc_canada_enrolment.csv`
+
+The file is the pivoted, filtered dataset: one row per academic year
+(1992/93–2024/25), with a two-level column header (geography, then student
+status). Cell values are **numbers of enrolments** — students enrolled, not
+applications or admissions.
+
+| Column | Meaning |
+|--------|---------|
+| `REF_DATE` | Academic year, e.g. `2024/2025` (the row index). |
+| `GEO` — `British Columbia` / `Canada` | Geography the enrolments are counted for. |
+| `Status of student in Canada` — `Canadian students` | Enrolments of Canadian students. |
+| `Status of student in Canada` — `International students` | Enrolments of international students. |
+| `Status of student in Canada` — `Total, status of student in Canada` | All enrolments (Canadian + international + the small unclassified remainder in early years). |
+
+Scope note: the file keeps totals only — total institution type, total
+registration status, total field of study, and total gender — so it has no
+breakdown by university vs college, program, or level of study.
+
 ## How to re-run the analysis
 
-Requires Python 3 with `pandas` and `matplotlib` installed.
-
 ```bash
+pip install -r requirements.txt
 python analysis.py
 ```
 
 On first run the script downloads the Statistics Canada table (about 67 MB),
 filters it, prints the headline findings, and writes the filtered dataset to
 `data/bc_canada_enrolment.csv` and the charts to `charts/` (PNG and SVG).
+The downloaded ZIP lands in the repository root and is gitignored — it is
+never committed. Tests need no download (they use the filtered CSV):
+
+```bash
+pytest
+```
 
 ## Limitations — read before quoting these numbers
 
